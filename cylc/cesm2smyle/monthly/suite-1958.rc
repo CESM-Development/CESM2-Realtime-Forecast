@@ -12,9 +12,9 @@
     CESM_ROOT = "/glade/work/nanr/cesm_tags/cesm2.1.4-SMYLE/"
     SCRATCH   = "/glade/scratch/nanr/"
     USECASE   = "cesm2smyle-extend"
-    REFDIR    = "/glade/scratch/nanr/SMYLE-DP/archive/"
+    REFDIR    = "/glade/scratch/nanr/SMYLE-EXTEND/archive/"
     POSTPROCESS_PATH = "/glade/work/jedwards/sandboxes/CESM_postprocessing"
-    SMYLE_ROOT = "/glade/p/cesm/espwg/CESM2-SMYLE-DP/"
+    SMYLE_ROOT = "/glade/p/cesm/espwg/CESM2-SMYLE-EXTEND/"
   [[parameters]]
     # The number of ensemble members can be changed here
     # The first number here should always be 1 and the second the number of members to run
@@ -25,8 +25,8 @@
 [scheduling]
   # Change the run start and end dates here
   # NOTE:  This date is the startdate of the EXTENSION
-    initial cycle point = "1966-11-01"
-    final cycle point = "1966-11-01"
+    initial cycle point = "1959-11-01"
+    final cycle point = "1959-11-01"
     #initial cycle point = "2019-08-01"
     #final cycle point = "2019-08-01"
 
@@ -66,7 +66,7 @@ cd ${FCST_HOME}/bin/
        -S = /bin/bash
        -l = select=1:ncpus=8:ompthreads=1
     [[[environment]]]
-       SMYLE_ROOT = "/glade/p/cesm/espwg/CESM2-SMYLE-DP/"
+       SMYLE_ROOT = "/glade/p/cesm/espwg/CESM2-SMYLE-EXTEND/"
 
   [[build_model]]
     script = """
@@ -111,15 +111,16 @@ mpirun ./timeseries > ./logs/timeseries.log.${today} 2>&1
     [[[environment]]]
       #CYLC_TASK_CYCLE_MONTH = $(cylc cyclepoint --template=%m)
       CYLC_TASK_CYCLE_DATE = $(cylc cyclepoint --template=%Y-%m)
-      SMYLE_ROOT = "/glade/p/cesm/espwg/CESM2-SMYLE-DP"
+      SMYLE_ROOT = "/glade/p/cesm/espwg/CESM2-SMYLE-EXTEND"
     [[[job]]]
       batch system = pbs
+      #batch submit command template = qsubcasper -q casper -l walltime=03:00:00 -A P93300313 '%(job)s'
       batch submit command template = qsub -q regular -l walltime=03:00:00 -A P93300313 '%(job)s'
       shell = /bin/bash
     [[[directives]]]
        -r = n
        -j = oe
-       -v = FCST_HOME=/glade/work/nanr/cesm_tags/CASE_tools/cesm2-smyle-DP/,SMYLE_ROOT=/glade/p/cesm/espwg/CESM2-SMYLE-DP
+       -v = FCST_HOME=/glade/work/nanr/cesm_tags/CASE_tools/cesm2-smyle-DP/,SMYLE_ROOT=/glade/p/cesm/espwg/CESM2-SMYLE-EXTEND
        -S = /bin/bash
        -l = select=1:ncpus=36:mpiprocs=36:ompthreads=1
 

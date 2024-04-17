@@ -3,24 +3,23 @@
 module load ncl nco
 
 setenv CESM2_TOOLS_ROOT /glade/work/nanr/cesm_tags/CASE_tools/cesm2-smyle/
-setenv CASEROOT /glade/p/cesm/espwg/CESM2-SMYLE-DP/cases
-#setenv CASEROOT /glade/p/cesm/espwg/CESM2-SMYLE-EXTEND/cases
-#setenv CASEROOT /glade/p/cesm/espwg/CESM2-SMYLE/cases
+setenv DOUT_S_ROOT  /glade/scratch/$USER/SMYLE/archive/
+setenv CASEROOT /glade/p/cesm/espwg/CESM2-SMYLE-EXTEND/cases
 
 # ...
-set syr = 1962
-set eyr = 1962
+set syr = 2019
+set eyr = 2019
 
 @ ib = $syr
 @ ie = $eyr
 
 foreach year ( `seq $ib $ie` )
-foreach mon ( 11 )
-#foreach mon ( 08 )
+#foreach mon ( 11 )
+foreach mon ( 08 )
 
 # case name counter
-set smbr =  21
-set embr =  30
+set smbr =  1
+set embr =  20
 
 @ mb = $smbr
 @ me = $embr
@@ -33,13 +32,8 @@ else
 endif
 
 cd $CASEROOT/$CASE
-echo $CASE
-#./xmlchange PROJECT=P93300313
-if ($mbr != 24 ) then
-./xmlchange STOP_N=2
-./xmlchange REST_N=2
-endif
-./case.submit
+./xmlchange STOP_N=24
+./xmlchange REST_N=24
 
 end             # mbr loop
 end             # mon loop
