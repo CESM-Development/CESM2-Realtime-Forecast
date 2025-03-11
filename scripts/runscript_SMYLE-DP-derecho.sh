@@ -1,7 +1,7 @@
 #!/bin/bash
 
-useyear=2022
-restyear=2024
+useyear=1992
+restyear=1994
 usemonth=11
 
 curdir='/glade/work/nanr/cesm_tags/CASE_tools/cesm2-smyle-DP/'
@@ -14,7 +14,7 @@ caseroot='/glade/campaign/cesm/development/espwg/SMYLE-CASES/CESM2-SMYLE-DP/case
 
 main_case_root='b.e21.'$usecompset'.'$resoln'.'${useyear}'-'${usemonth}'.001'
 
-for mbr in $(seq -f "%03g" 1 10)
+for mbr in $(seq -f "%03g" 30 30)
 do
 
 echo "setting up member ${mbr}"

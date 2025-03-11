@@ -4,7 +4,7 @@
 #PBS -q main
 #PBS -l select=12:ncpus=128:mpiprocs=16
 #PBS -l walltime=12:00:00
-#PBS -A P93300313
+#PBS -A P06010014
 
 
 ##########

@@ -1,6 +1,8 @@
 #!/bin/bash
 
 useyear=1960
+useyear=1965
+useyear=1970
 usemonth=11
 
 curdir='/glade/work/nanr/cesm_tags/CASE_tools/cesm2-smyle-DP/'
@@ -13,7 +15,7 @@ caseroot='/glade/campaign/cesm/development/espwg/SMYLE-CASES/CESM2-SMYLE-MDP/cas
 
 main_case_root='b.e21.'$usecompset'.'$resoln'.MDP.'${useyear}'-'${usemonth}'.001'
 
-for mbr in $(seq -f "%03g" 1 1)
+for mbr in $(seq -f "%03g" 8 9)
 do
 
 echo "setting up member ${mbr}"
@@ -48,7 +50,7 @@ cd $casedir
 ./xmlchange RUNDIR=$rundir
 ./xmlchange OCN_TRACER_MODULES="iage cfc ecosys"
  
-./xmlchange PROJECT=CESM0021
+./xmlchange PROJECT=CESM0020
 ./xmlchange STOP_N=24
 ./xmlchange REST_N=24
 ./xmlchange STOP_OPTION=nmonths
@@ -85,7 +87,7 @@ echo "made it this far"
     cp ${ics}/${useyear}-${usemonth}-01/b.e21.* ${rundir}/
 
     # perturb the atmosphere IC
-    if [[ ${mbr} -ne "001" ]]
+    if [[ ${mbr} != "001" ]]
     then
        shortmbr=${mbr:1:3}
        echo $shortmbr
@@ -95,7 +97,7 @@ echo "made it this far"
     fi
 
     cd $casedir
-    #if [[ ${mbr} -eq "021" ]]
+    #if [[ ${mbr} == "021" ]]
     #then
        #cd $casedir
        #qcmd -- ./case.build

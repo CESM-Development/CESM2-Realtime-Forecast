@@ -4,7 +4,9 @@
 module load ncl nco
 
 setenv CESM2_TOOLS_ROOT /glade/work/nanr/cesm_tags/CASE_tools/cesm2-smyle-DP/pp-offline/derecho/
-setenv DOUT_S_ROOT  /glade/derecho/scratch/nanr/SMYLE-DP/archive/
+setenv DOUT_S_ROOT  /glade/derecho/scratch/nanr/SMYLE-DP-climoIC/archive/
+#setenv DOUT_S_ROOT  /glade/derecho/scratch/nanr/SMYLE-DP/archive/
+#setenv DOUT_S_ROOT  /glade/derecho/scratch/sglanvil/SMYLE-DP/archive/
 setenv CASEROOT /glade/derecho/scratch/$USER/post-proc/
 
 # if ( ! -d "postprocess" ) then
@@ -13,10 +15,13 @@ setenv CASEROOT /glade/derecho/scratch/$USER/post-proc/
    # create_postprocess -caseroot=`pwd`
 # endif
 
-foreach YEAR ( `seq 1960 1960` )
-	foreach mbr ( `seq 11 11` )
+foreach YEAR ( `seq 2005 2005` )
+	foreach mbr ( `seq 1 30` )
 		set mbr_padZeros = `printf %03d $mbr`
-		set CASE = b.e21.BSMYLE.f09_g17.${YEAR}-11.${mbr_padZeros}
+		set CASE = b.e21.BSMYLE_climoOcnAtmIC.f09_g17.2005-11.${mbr_padZeros}
+		#set CASE = b.e21.BSMYLE.f09_g17.${YEAR}-11.${mbr_padZeros}
+		#set CASE = b.e21.BSMYLE-XT.f09_g17.${YEAR}-11.${mbr_padZeros}
+		#set CASE = b.e21.BSMYLE-XT-beta.f09_g17.${YEAR}-11.${mbr_padZeros}
 		set usembr = ${mbr_padZeros}
 		mkdir -p $CASEROOT/$CASE
 		cd $CASEROOT/$CASE

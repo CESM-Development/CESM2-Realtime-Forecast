@@ -7,8 +7,8 @@ setenv TSERIES2  /glade/campaign/cesm/development/espwg/CESM2-DP/timeseries
 #setenv TSERIES2  /glade/campaign/cesm/development/espwg/SMYLE/archive/pre-1970
 
 # ...
-set syr = 1958
-set eyr = 2018
+set syr = 2020
+set eyr = 2022
 
 @ ib = $syr
 @ ie = $eyr
@@ -17,7 +17,7 @@ foreach year ( `seq $ib $ie` )
 foreach mon ( 11 )
 
 # case name counter
-set smbr =  21
+set smbr =  1
 set embr =  30
 
 @ mb = $smbr
